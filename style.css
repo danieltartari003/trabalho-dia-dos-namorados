@@ -1,0 +1,650 @@
+ .container {
+     display: grid;
+     grid-template-rows: auto auto 1fr auto;
+     min-height: 100vh;
+     position: relative;
+     overflow: visible;
+ }
+
+ /* Responsividade para decorações laterais */
+ @media (max-width: 900px) {
+
+     .container::before,
+     .container::after {
+         display: none;
+     }
+ }
+
+ /* Subtle side decorations (light details in lateral margins) */
+ .container::before,
+ .container::after {
+     content: "";
+     position: absolute;
+     top: 0;
+     bottom: 0;
+     width: 72px;
+     pointer-events: none;
+     background-image: radial-gradient(circle at 30% 20%, rgba(255, 217, 235, 0.28), transparent 35%),
+         radial-gradient(circle at 70% 65%, rgba(255, 246, 240, 0.22), transparent 30%),
+         linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0) 45%),
+         repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0 2px, transparent 2px 14px);
+     opacity: 0.85;
+     z-index: 0;
+ }
+
+ .container::before {
+     left: 0;
+     transform: skewY(-2deg);
+ }
+
+ .container::after {
+     right: 0;
+     transform: skewY(2deg);
+ }
+
+ /* keep main content above decorations */
+ .container>* {
+     position: relative;
+     z-index: 1;
+ }
+
+ body::before,
+ body::after {
+     content: "";
+     position: fixed;
+     width: 140px;
+     height: 180px;
+     border-radius: 50% 50% 55% 55%;
+     pointer-events: none;
+     filter: blur(14px);
+     z-index: 0;
+ }
+
+ body::before {
+     left: 0;
+     top: 18%;
+     background: radial-gradient(circle at 45% 40%, rgba(255, 176, 211, 0.26), transparent 45%);
+ }
+
+ body::after {
+     right: 0;
+     top: 52%;
+     background: radial-gradient(circle at 55% 40%, rgba(255, 235, 213, 0.24), transparent 42%);
+ }
+
+ header {
+     background: linear-gradient(135deg, #f3c7a2 0%, #f582c6 100%);
+     color: aliceblue;
+     padding: 18px 20px;
+     position: relative;
+     overflow: hidden;
+     box-shadow: 0 12px 30px rgba(201, 85, 176, 0.18);
+ }
+
+ .header-brand {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     gap: 14px;
+     flex-wrap: wrap;
+     margin-bottom: 12px;
+ }
+
+ .site-logo {
+     width: 100px;
+     min-width: 100px;
+     padding: 0;
+     border-radius: 0;
+     background: transparent;
+     box-shadow: none;
+     cursor: pointer;
+     transition: transform 220ms ease, filter 220ms ease;
+ }
+
+ .site-logo:hover,
+ .site-logo:focus-within {
+     transform: translateY(-2px) scale(1.03);
+ }
+
+ .site-logo img {
+     width: 100%;
+     height: auto;
+     display: block;
+     border-radius: 12px;
+     background: transparent;
+     box-shadow: none;
+     object-fit: contain;
+     transition: transform 220ms ease, filter 220ms ease;
+ }
+
+ .site-logo:hover img,
+ .site-logo:focus-within img {
+     transform: scale(1.02);
+     filter: brightness(1.05);
+ }
+
+ .header-top {
+     text-align: left;
+     max-width: 520px;
+ }
+
+ @media (max-width: 740px) {
+     .header-brand {
+         flex-direction: column;
+     }
+
+     .header-top {
+         text-align: center;
+     }
+ }
+
+ header::before {
+     content: '♥';
+     position: absolute;
+     right: 18px;
+     top: 12px;
+     font-size: 3rem;
+     opacity: 0.18;
+     transform: rotate(15deg);
+ }
+
+ header::after {
+     content: '';
+     position: absolute;
+     left: 50%;
+     top: 50%;
+     width: 280px;
+     height: 260px;
+     transform: translate(-50%, -45%) rotate(12deg);
+     background: radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.45), transparent 55%), radial-gradient(circle at 65% 35%, rgba(255, 238, 255, 0.35), transparent 40%);
+     filter: blur(12px);
+     opacity: 0.8;
+     pointer-events: none;
+ }
+
+ header h1 {
+     margin: 0;
+     font-size: 2.4rem;
+     letter-spacing: 0.1rem;
+     text-transform: uppercase;
+     position: relative;
+     z-index: 2;
+     text-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+     transition: text-shadow 0.25s ease, color 0.25s ease, transform 0.25s ease;
+ }
+
+ header h1:hover {
+     color: #fff;
+     transform: scale(1.03);
+     text-shadow: 0 0 20px rgba(255, 255, 255, 0.9), 0 0 40px rgba(255, 110, 176, 0.65);
+ }
+
+ .header-subtitle {
+     margin: 12px auto 0;
+     max-width: 720px;
+     color: #ffe8fb;
+     font-size: 1rem;
+     line-height: 1.6;
+ }
+
+ nav {
+     position: relative;
+     overflow: hidden;
+     background-color: #fce3d3;
+     padding: 10px;
+ }
+
+ nav::before {
+     content: '';
+     position: absolute;
+     inset: 0;
+     background-image: radial-gradient(circle at 18% 35%, rgba(255, 255, 255, 0.28), transparent 20%), radial-gradient(circle at 82% 55%, rgba(255, 238, 242, 0.22), transparent 18%);
+     pointer-events: none;
+ }
+
+ nav ul {
+     position: relative;
+     z-index: 1;
+     display: flex;
+     gap: 20px;
+     justify-content: center;
+     list-style: none;
+     margin: 0;
+     padding: 0;
+ }
+
+ nav a {
+     color: #3f1d3f;
+     text-decoration: none;
+     font-weight: 700;
+     text-transform: uppercase;
+     letter-spacing: 0.08em;
+     padding: 10px 18px;
+     border-radius: 999px;
+     background: rgba(255, 255, 255, 0.75);
+     box-shadow: 0 8px 18px rgba(128, 49, 98, 0.08);
+     transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+ }
+
+ nav a:hover,
+ nav a:focus-visible {
+     transform: translateY(-1px);
+     background: rgba(255, 255, 255, 0.95);
+     color: #b61f7c;
+     box-shadow: 0 12px 24px rgba(169, 63, 115, 0.14);
+ }
+
+ nav a.ativo {
+     background: #f8d1e4;
+     color: #6e1d4e;
+ }
+
+ main {
+     background: #fff8f8;
+     padding: 20px;
+     border-radius: 10px;
+     margin: 0 15%;
+ }
+
+ main .image-center {
+     display: flex;
+     justify-content: center;
+     gap: 10px;
+     margin: 30px 0;
+     flex-wrap: wrap;
+ }
+
+ main .page3-photos {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+     gap: 16px;
+     align-items: center;
+ }
+
+ main .page3-photos figure {
+     margin: 0;
+     text-align: center;
+ }
+
+ main .page3-photos img {
+     width: 100%;
+     max-width: 280px;
+     max-height: 220px;
+     object-fit: cover;
+     border-radius: 12px;
+     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+ }
+
+ main .page3-photos figcaption {
+     margin-top: 10px;
+     color: #6b3a4d;
+     font-size: 0.95rem;
+ }
+
+ main .image-center img {
+     width: 100%;
+     max-width: 280px;
+     height: auto;
+     border-radius: 12px;
+     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+ }
+
+ main .curiosidade {
+     margin-top: 16px;
+     text-align: center;
+     color: #333;
+ }
+
+ main .hero {
+     position: relative;
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+     gap: 24px;
+     align-items: center;
+     padding: 28px;
+     background: linear-gradient(180deg, #ffe8f7 0%, #fff2f8 100%);
+     border-radius: 18px;
+     margin-bottom: 24px;
+ }
+
+ main .hero::before {
+     content: '❤';
+     position: absolute;
+     left: 18px;
+     top: 18px;
+     font-size: 2.5rem;
+     color: rgba(255, 255, 255, 0.25);
+     transform: rotate(-12deg);
+     pointer-events: none;
+ }
+
+ main .hero::after {
+     content: '';
+     position: absolute;
+     right: 16px;
+     bottom: 16px;
+     width: 120px;
+     height: 120px;
+     border-radius: 50%;
+     background: radial-gradient(circle, rgba(255, 182, 216, 0.26), transparent 52%);
+     pointer-events: none;
+ }
+
+ main .hero-content {
+     max-width: 520px;
+ }
+
+ main .hero-actions {
+     display: flex;
+     gap: 12px;
+     flex-wrap: wrap;
+     margin-top: 20px;
+ }
+
+ main .btn {
+     display: inline-block;
+     padding: 12px 18px;
+     border-radius: 999px;
+     background: rgb(207, 69, 168);
+     color: white;
+     text-decoration: none;
+     font-weight: bold;
+     transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+ }
+
+ main .btn:hover {
+     transform: translateY(-2px);
+     box-shadow: 0 10px 24px rgba(207, 69, 168, 0.22);
+ }
+
+ main .btn.secondary {
+     background: white;
+     color: rgb(207, 69, 168);
+     border: 1px solid rgb(207, 69, 168);
+ }
+
+ main .hero-media img {
+     width: 100%;
+     max-width: 100%;
+     height: auto;
+     border-radius: 18px;
+     box-shadow: 0 14px 36px rgba(199, 46, 143, 0.16);
+ }
+
+ main .hero .hero-title {
+     font-size: 2rem;
+     line-height: 1.1;
+     margin-bottom: 14px;
+     max-width: 760px;
+     background: linear-gradient(90deg, #d84a9e, #f1a1d6, #ff7dbb);
+     -webkit-background-clip: text;
+     color: transparent;
+     position: relative;
+     transition: transform 0.25s ease, filter 0.25s ease;
+ }
+
+ /* Micro-interactions: cards, gallery figures, buttons and home button */
+ .card,
+ .gallery-grid figure,
+ .btn,
+ .home-button {
+     transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 220ms ease, opacity 180ms ease;
+     will-change: transform, box-shadow;
+ }
+
+ .card:hover,
+ .gallery-grid figure:hover {
+     transform: translateY(-6px) scale(1.02);
+     box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+ }
+
+ .gallery-grid figure img {
+     transition: transform 300ms ease;
+ }
+
+ .gallery-grid figure:hover img {
+     transform: scale(1.03);
+ }
+
+ .btn:focus-visible,
+ .home-button:focus-visible,
+ .card:focus-within {
+     outline: none;
+     box-shadow: 0 0 0 6px rgba(217, 73, 150, 0.12);
+ }
+
+ /* Slight hover accent for hero title */
+ .hero-title:hover {
+     filter: brightness(1.03) saturate(1.05);
+ }
+
+ /* Respect user's reduced motion preference */
+ @media (prefers-reduced-motion: reduce) {
+
+     .card,
+     .gallery-grid figure,
+     .btn,
+     .home-button,
+     .hero-title {
+         transition: none !important;
+         animation: none !important;
+         transform: none !important;
+     }
+ }
+
+ main .hero .hero-title span {
+     display: inline-block;
+     transition: transform 0.25s ease;
+ }
+
+ main .hero .hero-title:hover {
+     transform: translateY(-3px);
+ }
+
+ main .hero .hero-title:hover span {
+     transform: scale(1.03);
+ }
+
+ main .hero .hero-title::after {
+     content: '❤️';
+     position: absolute;
+     right: -30px;
+     top: 0;
+     font-size: 1.1rem;
+     opacity: 0;
+     transition: opacity 0.25s ease, transform 0.25s ease;
+ }
+
+ main .hero .hero-title:hover::after {
+     opacity: 1;
+     transform: translateX(4px);
+ }
+
+ main .cards-grid {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+     gap: 18px;
+     margin-bottom: 24px;
+ }
+
+ main .card {
+     position: relative;
+     background: white;
+     border: 1px solid #f0d4e8;
+     padding: 18px;
+     border-radius: 12px;
+     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+ }
+
+ main .card::before {
+     content: '💌';
+     position: absolute;
+     top: -12px;
+     right: 14px;
+     font-size: 2rem;
+     opacity: 0.16;
+     transform: rotate(-18deg);
+     pointer-events: none;
+ }
+
+ main .card h3 {
+     margin-top: 0;
+     position: relative;
+     z-index: 1;
+ }
+
+ /* Gallery grid used in pagina2.html */
+ .gallery-grid {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+     gap: 14px;
+     margin: 18px 0 28px;
+ }
+
+ .gallery-grid figure {
+     margin: 0;
+     background: white;
+     border-radius: 12px;
+     overflow: hidden;
+     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+     text-align: center;
+ }
+
+ .gallery-grid img {
+     width: 100%;
+     height: auto;
+     display: block;
+     border-radius: 12px;
+     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+ }
+
+ .gallery-grid figcaption {
+     padding: 8px 10px;
+     font-size: 0.95rem;
+     color: #333;
+ }
+
+ main .duo-section {
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+     gap: 20px;
+     align-items: center;
+     margin-bottom: 24px;
+ }
+
+ main .duo-section div {
+     background: white;
+     border-radius: 12px;
+     padding: 18px;
+ }
+
+ main .tips {
+     background: #fff4e5;
+     border: 1px solid #f3d1b7;
+     border-radius: 12px;
+     padding: 18px;
+     margin-bottom: 24px;
+ }
+
+ main .tips h3 {
+     margin-top: 0;
+ }
+
+ main .tips ul {
+     margin: 0;
+     padding-left: 20px;
+ }
+
+ main .highlight {
+     background: #f8e9ff;
+     border-radius: 12px;
+     padding: 18px;
+     margin-bottom: 24px;
+ }
+
+ footer {
+     position: relative;
+     background: linear-gradient(135deg, #fbdbd8 0%, #f9c8d6 100%);
+     color: #3b2235;
+     text-align: center;
+     padding: 18px 20px;
+     border-radius: 0 0 18px 18px;
+     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+ }
+
+ footer::before {
+     content: '✨';
+     position: absolute;
+     left: 18px;
+     top: -8px;
+     font-size: 1.8rem;
+     opacity: 0.16;
+     transform: rotate(-18deg);
+ }
+
+ footer::after {
+     content: '';
+     position: absolute;
+     right: 18px;
+     top: 14px;
+     width: 72px;
+     height: 18px;
+     border-radius: 999px;
+     background: rgba(255, 255, 255, 0.48);
+ }
+
+ body {
+     margin: 0;
+     background: linear-gradient(180deg, #fff4f9 0%, #fff6f4 52%, #fff8f0 100%);
+     background-image:
+         radial-gradient(circle at 10% 18%, rgba(255, 194, 214, 0.35), transparent 20%),
+         radial-gradient(circle at 85% 16%, rgba(255, 241, 221, 0.35), transparent 16%),
+         radial-gradient(circle at 20% 82%, rgba(255, 233, 244, 0.25), transparent 14%),
+         radial-gradient(circle at 78% 72%, rgba(255, 255, 255, 0.2), transparent 18%);
+ }
+
+ /* Floating home button (casinha) */
+ .home-button {
+     position: fixed;
+     top: 14px;
+     left: 14px;
+     width: 48px;
+     height: 48px;
+     display: inline-flex;
+     align-items: center;
+     justify-content: center;
+     background: white;
+     color: #d94a97;
+     border-radius: 11px;
+     box-shadow: 0 10px 24px rgba(207, 69, 168, 0.18);
+     text-decoration: none;
+     border: 1px solid rgba(201, 85, 176, 0.12);
+     transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+     z-index: 9999;
+ }
+
+ .home-button svg {
+     width: 20px;
+     height: 20px;
+     display: block;
+ }
+
+ .home-button:hover {
+     transform: translateY(-3px);
+     box-shadow: 0 18px 40px rgba(207, 69, 168, 0.22);
+ }
+
+ @media (max-width: 600px) {
+     .home-button {
+         top: 10px;
+         left: 10px;
+         width: 40px;
+         height: 40px;
+         border-radius: 10px;
+     }
+
+     .home-button svg {
+         width: 16px;
+         height: 16px;
+     }
+ }
